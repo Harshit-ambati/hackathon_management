@@ -52,3 +52,8 @@ function validateHackathonDates(data, context) {
 
 export const hackathonSchema = hackathonBaseSchema.superRefine(validateHackathonDates);
 export const hackathonUpdateSchema = hackathonBaseSchema.partial().superRefine(validateHackathonDates);
+
+export const registrationReviewSchema = z.object({
+  status: z.enum(["approved", "rejected"]),
+  note: z.string().trim().max(300).optional(),
+});
