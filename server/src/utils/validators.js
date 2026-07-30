@@ -57,3 +57,22 @@ export const registrationReviewSchema = z.object({
   status: z.enum(["approved", "rejected"]),
   note: z.string().trim().max(300).optional(),
 });
+
+export const teamCreateSchema = z.object({
+  hackathonId: z.string().trim().min(1),
+  name: z.string().trim().min(2).max(80),
+  description: z.string().trim().max(500).optional(),
+});
+
+export const teamUpdateSchema = z.object({
+  name: z.string().trim().min(2).max(80).optional(),
+  description: z.string().trim().max(500).optional(),
+});
+
+export const teamMemberSchema = z.object({
+  email: z.string().trim().email().toLowerCase(),
+});
+
+export const transferLeadershipSchema = z.object({
+  userId: z.string().trim().min(1),
+});
