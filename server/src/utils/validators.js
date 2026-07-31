@@ -76,3 +76,24 @@ export const teamMemberSchema = z.object({
 export const transferLeadershipSchema = z.object({
   userId: z.string().trim().min(1),
 });
+
+export const submissionSchema = z.object({
+  teamId: z.string().trim().min(1),
+  projectName: z.string().trim().min(3).max(120),
+  problemStatement: z.string().trim().min(10).max(1200),
+  solution: z.string().trim().min(10).max(2000),
+  description: z.string().trim().min(20).max(3000),
+  githubRepository: z.string().trim().url(),
+  liveDemoUrl: z.string().trim().url().optional().or(z.literal("")),
+  techStack: z.array(z.string().trim().min(1).max(40)).max(20).optional(),
+  screenshots: z.array(z.string().trim().url()).max(8).optional(),
+  presentationPdf: z.string().trim().url().optional().or(z.literal("")),
+  demoVideoLink: z.string().trim().url().optional().or(z.literal("")),
+});
+
+export const submissionUpdateSchema = submissionSchema.omit({ teamId: true }).partial();
+
+export const submissionStatusSchema = z.object({
+  status: z.enum(["pending", "under_review", "approved", "rejected"]),
+  statusNote: z.string().trim().max(400).optional(),
+});
