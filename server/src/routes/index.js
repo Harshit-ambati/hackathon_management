@@ -3,6 +3,7 @@ import authRoutes from "./auth.routes.js";
 import hackathonRoutes from "./hackathon.routes.js";
 import healthRoutes from "./health.routes.js";
 import registrationRoutes from "./registration.routes.js";
+import reviewRoutes from "./review.routes.js";
 import submissionRoutes from "./submission.routes.js";
 import teamRoutes from "./team.routes.js";
 
@@ -14,5 +15,6 @@ router.use("/hackathons", hackathonRoutes);
 router.use("/registrations", registrationRoutes);
 router.use("/teams", teamRoutes);
 router.use("/submissions", submissionRoutes);
+router.use("/reviews", reviewRoutes);
 
 export default router;

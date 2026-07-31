@@ -97,3 +97,21 @@ export const submissionStatusSchema = z.object({
   status: z.enum(["pending", "under_review", "approved", "rejected"]),
   statusNote: z.string().trim().max(400).optional(),
 });
+
+export const judgeAssignmentSchema = z.object({
+  submissionId: z.string().trim().min(1),
+  judgeId: z.string().trim().min(1),
+});
+
+export const reviewSubmitSchema = z.object({
+  scores: z.object({
+    innovation: z.coerce.number().min(0).max(10),
+    technicalComplexity: z.coerce.number().min(0).max(10),
+    userInterface: z.coerce.number().min(0).max(10),
+    functionality: z.coerce.number().min(0).max(10),
+    scalability: z.coerce.number().min(0).max(10),
+    documentation: z.coerce.number().min(0).max(10),
+    presentation: z.coerce.number().min(0).max(10),
+  }),
+  feedback: z.string().trim().min(5).max(1200),
+});
