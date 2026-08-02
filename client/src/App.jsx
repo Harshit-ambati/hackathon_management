@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { AppLayout } from "./layouts/AppLayout";
 import { DashboardPage } from "./pages/DashboardPage";
 import { LoginPage, SignupPage } from "./pages/AuthPages";
-import { HackathonsPage, SimplePage } from "./pages/HackathonsPage";
+import { HackathonsPage, LeaderboardPage, SubmissionPage, TeamsPage } from "./pages/HackathonsPage";
 import { HomePage } from "./pages/HomePage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProfilePage } from "./pages/ProfilePage";
@@ -15,9 +15,7 @@ function App() {
       <Route element={<AppLayout />}>
         <Route index element={<HomePage />} />
         <Route path="hackathons" element={<HackathonsPage />} />
-        <Route path="teams" element={<SimplePage title="Teams" subtitle="Create, join, and manage hackathon teams." items={["Team Builder", "Invite Members", "Leadership Transfer"]} />} />
-        <Route path="submission" element={<SimplePage title="Submissions" subtitle="Submit project details, repository links, demos, screenshots, and presentation files." items={["Project Details", "Demo Links", "Review Status"]} />} />
-        <Route path="leaderboard" element={<SimplePage title="Leaderboard" subtitle="Rank teams by total judge score and publish winners." items={["Rank", "Team", "Total Score"]} />} />
+        <Route path="leaderboard" element={<LeaderboardPage />} />
 
         <Route element={<GuestRoute />}>
           <Route path="login" element={<LoginPage />} />
@@ -27,6 +25,8 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="dashboard" element={<Navigate to="/participant" replace />} />
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="teams" element={<TeamsPage />} />
+          <Route path="submission" element={<SubmissionPage />} />
           <Route path="participant" element={<DashboardPage role="participant" title="Participant Dashboard" subtitle="Track registered hackathons, team status, submissions, and results." />} />
           <Route element={<RoleRoute allowedRoles={["admin"]} />}>
             <Route path="admin" element={<DashboardPage role="admin" title="Admin Dashboard" subtitle="Manage users, roles, hackathons, teams, submissions, and platform analytics." />} />
