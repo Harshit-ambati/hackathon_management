@@ -15,12 +15,12 @@ const sampleUsers = [
   { name: "Participant Two", email: "participant2@codearena.test", password: "Password123", role: "participant", college: "CodeArena Institute", skills: ["MongoDB", "UI"] },
 ];
 
-async function resetSampleData() {
+export async function resetSampleData() {
   const sampleEmails = sampleUsers.map((user) => user.email);
   const users = await User.find({ email: { $in: sampleEmails } }).select("_id");
-  const userIds = users.map((user) => user._id);
   const hackathons = await Hackathon.find({ title: "CodeArena Sample Sprint" }).select("_id");
   const hackathonIds = hackathons.map((hackathon) => hackathon._id);
+  const userIds = users.map((user) => user._id);
   const teams = await Team.find({ hackathon: { $in: hackathonIds } }).select("_id");
   const teamIds = teams.map((team) => team._id);
   const submissions = await Submission.find({ team: { $in: teamIds } }).select("_id");
@@ -36,7 +36,7 @@ async function resetSampleData() {
   ]);
 }
 
-async function createSampleData() {
+export async function createSampleData() {
   const createdUsers = {};
 
   for (const user of sampleUsers) {
@@ -132,11 +132,15 @@ async function main() {
   console.log(`Review total score: ${sample.review.totalScore}`);
 }
 
-main()
-  .catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
-  })
-  .finally(async () => {
-    await mongoose.disconnect();
-  });
+import { fileURLToPath } from "node:url";
+
+if (process.argv[1] && process.argv[1] === fileURLToPath(import.meta.url)) {
+  main()
+    .catch((error) => {
+      console.error(error);
+      process.exitCode = 1;
+    })
+    .finally(async () => {
+      await mongoose.disconnect();
+    });
+}

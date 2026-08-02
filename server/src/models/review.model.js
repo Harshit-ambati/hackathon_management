@@ -31,12 +31,10 @@ reviewSchema.index({ submission: 1, judge: 1 }, { unique: true });
 reviewSchema.index({ judge: 1, status: 1 });
 reviewSchema.index({ hackathon: 1, status: 1 });
 
-reviewSchema.pre("save", function calculateTotal(next) {
+reviewSchema.pre("save", function calculateTotal() {
   if (this.scores) {
     this.totalScore = Object.values(this.scores.toObject ? this.scores.toObject() : this.scores).reduce((sum, score) => sum + Number(score || 0), 0);
   }
-
-  next();
 });
 
 export const Review = mongoose.model("Review", reviewSchema);

@@ -10,7 +10,7 @@ for (const key of requiredEnv) {
   }
 }
 
-const clientOrigins = (process.env.CLIENT_URL || "http://localhost:5173")
+const clientOrigins = (process.env.CLIENT_URL || "http://localhost:5173,http://localhost:5174")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);

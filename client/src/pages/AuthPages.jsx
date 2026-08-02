@@ -67,7 +67,7 @@ function AuthForm({ title, subtitle, submitLabel, form, setForm, error, isSubmit
         <p className="mt-3 leading-7 text-[#d7e2f4]">{subtitle}</p>
       </section>
       <form onSubmit={onSubmit} className="rounded-lg border border-[#dfe7f3] bg-white p-6 shadow-sm">
-        {showSignupFields && <TextInput label="Name" name="name" value={form.name} onChange={updateField} required />}
+        {showSignupFields && <TextInput label="Name" name="name" value={form.name} onChange={updateField} required minLength={2} />}
         <TextInput label="Email" name="email" type="email" value={form.email} onChange={updateField} required />
         <TextInput label="Password" name="password" type="password" value={form.password} onChange={updateField} required minLength={8} />
         {showSignupFields && (
