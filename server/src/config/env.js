@@ -10,6 +10,11 @@ for (const key of requiredEnv) {
   }
 }
 
+const clientOrigins = (process.env.CLIENT_URL || "http://localhost:5173")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 export const env = {
   nodeEnv: process.env.NODE_ENV || "development",
   port: process.env.PORT || 5000,
@@ -17,4 +22,5 @@ export const env = {
   jwtSecret: process.env.JWT_SECRET || "development_only_secret",
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
   clientUrl: process.env.CLIENT_URL || "http://localhost:5173",
+  clientOrigins,
 };
